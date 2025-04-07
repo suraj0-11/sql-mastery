@@ -71,7 +71,7 @@ const CourseDetail = () => {
     <Container sx={{ py: 8 }}>
       <Grid container spacing={4}>
         {/* Main Content Area */}
-        <Grid item xs={12} md={8}>
+        <Box sx={{ width: { xs: '100%', md: '66.66%' } }}>
           {/* Course Header */}
           <Paper sx={{ p: 3, mb: 4 }}>
             <Typography variant="h4" gutterBottom>
@@ -132,10 +132,10 @@ const CourseDetail = () => {
               </Button>
             </Box>
           </Paper>
-        </Grid>
+        </Box>
 
         {/* Sidebar Navigation */}
-        <Grid item xs={12} md={4}>
+        <Box sx={{ width: { xs: '100%', md: '33.33%' } }}>
           <Paper sx={{ p: 3, position: 'sticky', top: 80 }}>
             <Typography variant="h6" gutterBottom>
               Course Content
@@ -174,7 +174,7 @@ const CourseDetail = () => {
               </Box>
             ))}
           </Paper>
-        </Grid>
+        </Box>
       </Grid>
     </Container>
   );
