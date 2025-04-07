@@ -8,10 +8,9 @@ import {
   Button,
   Divider,
   Chip,
-  TextField,
   CircularProgress,
 } from '@mui/material';
-import { PlayArrow, CheckCircle, Code, Check } from '@mui/icons-material';
+import { PlayArrow, CheckCircle, Check } from '@mui/icons-material';
 import Editor from '@monaco-editor/react';
 
 const exercises = [

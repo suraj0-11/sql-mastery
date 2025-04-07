@@ -5,13 +5,10 @@ import {
   Typography,
   Paper,
   Grid,
-  Button,
-  Divider,
-  Chip,
   Tabs,
   Tab,
 } from '@mui/material';
-import { Code, Business, ShoppingCart, People } from '@mui/icons-material';
+import { ShoppingCart, People } from '@mui/icons-material';
 import Editor from '@monaco-editor/react';
 
 interface TabPanelProps {
@@ -112,7 +109,7 @@ ORDER BY p.rating DESC;`,
 const Examples = () => {
   const [value, setValue] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 

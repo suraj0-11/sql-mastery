@@ -5,14 +5,12 @@ import {
   Container,
   Typography,
   Paper,
-  Tabs,
-  Tab,
   Grid,
   Button,
   Divider,
   Chip,
 } from '@mui/material';
-import { PlayArrow, Code, CheckCircle, Lock } from '@mui/icons-material';
+import { PlayArrow, CheckCircle, Lock } from '@mui/icons-material';
 import Editor from '@monaco-editor/react';
 
 // Import the shared courses data
@@ -21,10 +19,10 @@ import { courses } from './Courses'; // Assuming Courses.tsx is in the same dire
 interface Lesson {
   id: number;
   title: string;
-  description?: string; // Make optional as not all lessons might have it
+  description?: string;
   duration: string;
   completed: boolean;
-  content?: string; // Make optional as not all lessons might have code content
+  content?: string;
 }
 
 interface Course {
@@ -37,31 +35,6 @@ interface Course {
   lessons: Lesson[];
 }
 
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
-}
-
-// Remove the hardcoded lessons array
-// const lessons = [...]; 
-
 const CourseDetail = () => {
   const { id } = useParams<{ id: string }>();
   const courseId = Number(id);
@@ -70,24 +43,13 @@ const CourseDetail = () => {
   const course = courses.find((c) => c.id === courseId);
 
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
-  // const [value, setValue] = useState(0); // Remove if Tabs are not used here
-  // const [sqlQuery, setSqlQuery] = useState(''); // Remove if query execution is not implemented here
 
   // Handle case where course is not found
   if (!course) {
-    return <Navigate to="/courses" replace />; // Or show a 404 component
+    return <Navigate to="/courses" replace />;
   }
 
   const currentLesson = course.lessons[currentLessonIndex];
-
-  // const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-  //   setValue(newValue);
-  // };
-
-  // const handleRunQuery = () => {
-  //   // Here you would typically send the query to a backend service
-  //   console.log('Running query:', sqlQuery);
-  // };
 
   const handleNextLesson = () => {
     if (currentLessonIndex < course.lessons.length - 1) {
@@ -102,9 +64,7 @@ const CourseDetail = () => {
   };
 
   const handleLessonClick = (index: number) => {
-      // For now, allow clicking any lesson
-      // Later, you might add logic to only allow clicking completed/unlocked lessons
-      setCurrentLessonIndex(index);
+    setCurrentLessonIndex(index);
   };
 
   return (
@@ -132,26 +92,26 @@ const CourseDetail = () => {
               {currentLesson.title}
             </Typography>
             {currentLesson.description && (
-                 <Typography variant="body1" paragraph>
-                    {currentLesson.description}
-                 </Typography>
+              <Typography variant="body1" paragraph>
+                {currentLesson.description}
+              </Typography>
             )}
             
             {/* Display code editor only if content exists */}
             {currentLesson.content && (
-                <Box sx={{ border: '1px solid', borderColor: 'divider', borderRadius: 1, mb: 3 }}>
+              <Box sx={{ border: '1px solid', borderColor: 'divider', borderRadius: 1, mb: 3 }}>
                 <Editor
-                    height="300px"
-                    defaultLanguage="sql"
-                    value={currentLesson.content}
-                    theme="vs-dark"
-                    options={{
+                  height="300px"
+                  defaultLanguage="sql"
+                  value={currentLesson.content}
+                  theme="vs-dark"
+                  options={{
                     minimap: { enabled: false },
                     fontSize: 14,
-                    readOnly: true, // Make the editor read-only for lesson display
-                    }}
+                    readOnly: true,
+                  }}
                 />
-                </Box>
+              </Box>
             )}
 
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 3 }}>
@@ -176,27 +136,26 @@ const CourseDetail = () => {
 
         {/* Sidebar Navigation */}
         <Grid item xs={12} md={4}>
-          <Paper sx={{ p: 3, position: 'sticky', top: 80 }}> {/* Make sidebar sticky */}
+          <Paper sx={{ p: 3, position: 'sticky', top: 80 }}>
             <Typography variant="h6" gutterBottom>
               Course Content
             </Typography>
             <Divider sx={{ my: 2 }} />
-            {/* Use the lessons from the fetched course data */}
             {course.lessons.map((lesson, index) => (
               <Box
                 key={lesson.id}
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
-                  py: 1.2, // Increased padding
-                  px: 1, // Added horizontal padding
+                  py: 1.2,
+                  px: 1,
                   cursor: 'pointer',
-                  borderRadius: '4px', // Added border radius
-                  mb: 0.5, // Add some margin between items
+                  borderRadius: '4px',
+                  mb: 0.5,
                   bgcolor: index === currentLessonIndex ? 'action.selected' : 'transparent',
                   color: index === currentLessonIndex ? 'primary.main' : 'text.primary',
                   '&:hover': {
-                      bgcolor: index !== currentLessonIndex ? 'action.hover' : 'action.selected',
+                    bgcolor: index !== currentLessonIndex ? 'action.hover' : 'action.selected',
                   }
                 }}
                 onClick={() => handleLessonClick(index)}
@@ -204,11 +163,11 @@ const CourseDetail = () => {
                 {lesson.completed ? (
                   <CheckCircle sx={{ mr: 1.5, color: 'success.main' }} />
                 ) : (
-                  <Lock sx={{ mr: 1.5, color: 'text.disabled' }} /> // Use disabled color for lock
+                  <Lock sx={{ mr: 1.5, color: 'text.disabled' }} />
                 )}
                 <Typography 
                   variant="body2" 
-                  sx={{ fontWeight: index === currentLessonIndex ? 'bold' : 'normal'}} // Bold active lesson
+                  sx={{ fontWeight: index === currentLessonIndex ? 'bold' : 'normal'}}
                 >
                   {lesson.title}
                 </Typography>
