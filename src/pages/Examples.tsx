@@ -149,14 +149,14 @@ const Examples = () => {
 
       <Grid container spacing={4}>
         {industryExamples.map((industry, index) => (
-          <Grid item xs={12} key={index}>
-            <Paper sx={{ p: 3, mb: 4 }}>
+          <Box sx={{ width: '100%', mb: 4 }} key={index}>
+            <Paper sx={{ p: 3 }}>
               <Typography variant="h5" gutterBottom>
                 {industry.industry}
               </Typography>
               <Grid container spacing={3}>
                 {industry.examples.map((example, exampleIndex) => (
-                  <Grid item xs={12} md={6} key={exampleIndex}>
+                  <Box sx={{ width: { xs: '100%', md: '50%' }, p: 1.5 }} key={exampleIndex}>
                     <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                       <CardContent sx={{ flexGrow: 1 }}>
                         <Typography variant="h6" gutterBottom>
@@ -184,11 +184,11 @@ const Examples = () => {
                         <Button size="small">View Details</Button>
                       </CardActions>
                     </Card>
-                  </Grid>
+                  </Box>
                 ))}
               </Grid>
             </Paper>
-          </Grid>
+          </Box>
         ))}
       </Grid>
     </Container>
