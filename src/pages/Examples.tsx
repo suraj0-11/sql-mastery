@@ -7,6 +7,15 @@ import {
   Grid,
   Tabs,
   Tab,
+  Card,
+  CardContent,
+  CardActions,
+  Button,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
 import { ShoppingCart, People } from '@mui/icons-material';
 import Editor from '@monaco-editor/react';
@@ -144,31 +153,36 @@ const Examples = () => {
 
         {examples.map((category, index) => (
           <TabPanel key={index} value={value} index={index}>
-            <Grid container spacing={4}>
+            <Grid container spacing={4} sx={{ mb: 6 }}>
               {category.examples.map((example, exampleIndex) => (
-                <Grid item xs={12} key={exampleIndex}>
-                  <Paper sx={{ p: 3 }}>
-                    <Typography variant="h5" gutterBottom>
-                      {example.title}
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary" paragraph>
-                      {example.description}
-                    </Typography>
-                    <Box sx={{ border: '1px solid', borderColor: 'divider', borderRadius: 1 }}>
-                      <Editor
-                        height="200px"
-                        defaultLanguage="sql"
-                        value={example.query}
-                        theme="vs-dark"
-                        options={{
-                          minimap: { enabled: false },
-                          fontSize: 14,
-                          readOnly: true,
-                        }}
-                      />
-                    </Box>
-                  </Paper>
-                </Grid>
+                <Box key={exampleIndex} sx={{ width: { xs: 12, sm: 6, md: 4 }, p: 2 }}>
+                  <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                    <CardContent sx={{ flexGrow: 1 }}>
+                      <Typography variant="h5" gutterBottom>
+                        {example.title}
+                      </Typography>
+                      <Typography variant="body1" color="text.secondary" paragraph>
+                        {example.description}
+                      </Typography>
+                      <Box sx={{ border: '1px solid', borderColor: 'divider', borderRadius: 1 }}>
+                        <Editor
+                          height="200px"
+                          defaultLanguage="sql"
+                          value={example.query}
+                          theme="vs-dark"
+                          options={{
+                            minimap: { enabled: false },
+                            fontSize: 14,
+                            readOnly: true,
+                          }}
+                        />
+                      </Box>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small">Learn More</Button>
+                    </CardActions>
+                  </Card>
+                </Box>
               ))}
             </Grid>
           </TabPanel>

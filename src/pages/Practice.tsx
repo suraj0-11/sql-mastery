@@ -107,7 +107,7 @@ const Practice = () => {
 
       <Grid container spacing={4}>
         {/* Exercise Details */}
-        <Grid item xs={12} md={5}>
+        <Box sx={{ width: { xs: '100%', md: '60%' }, p: 2 }}>
           <Paper sx={{ p: 3, mb: 4, height: '100%' }}>
             <Typography variant="h5" gutterBottom>
               {currentExercise.title}
@@ -140,10 +140,10 @@ const Practice = () => {
               </Box>
             )}
           </Paper>
-        </Grid>
+        </Box>
 
         {/* Query Editor and Results */}
-        <Grid item xs={12} md={7}>
+        <Box sx={{ width: { xs: '100%', md: '40%' }, p: 2 }}>
           <Paper sx={{ p: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
             <Typography variant="h6" gutterBottom>
               Your Query
@@ -225,7 +225,7 @@ const Practice = () => {
               </Box>
             )}
           </Paper>
-        </Grid>
+        </Box>
       </Grid>
     </Container>
   );
